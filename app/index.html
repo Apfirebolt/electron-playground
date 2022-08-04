@@ -53,13 +53,13 @@
       form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const username = document.getElementById("userEmail").value;
+        const email = document.getElementById("userEmail").value;
         const password = document.getElementById("userPassword").value;
 
-        console.log(username, password)
+        console.log(email, password)
 
         ipcRenderer.send("form:insertData", {
-          username,
+          email,
           password,
         });
       });

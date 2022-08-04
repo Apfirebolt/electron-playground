@@ -13,6 +13,8 @@
   "author": "Apfirebolt",
   "license": "ISC",
   "dependencies": {
-    "electron": "^20.0.1"
+    "bcryptjs": "^2.4.3",
+    "electron": "^20.0.1",
+    "mongoose": "^6.5.1"
   }
 }

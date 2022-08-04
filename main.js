@@ -1,4 +1,10 @@
 const { app, BrowserWindow, ipcMain, Menu } = require('electron')
+const connectDB = require('./app/config/db.js');
+
+const User = require('./app/models/user');
+
+// Connect to the database
+connectDB();
 
 // Set env
 process.env.NODE_ENV = 'development'
@@ -104,9 +110,21 @@ const menu = [
     : []),
 ]
 
-ipcMain.on('form:insertData', (e, data) => {
-  // Get the data from the form
-  console.log('Data is ', data);
+ipcMain.on('form:insertData', async (e, data) => {
+  // Get the data from the form and insert a new record
+  try {
+    const user = await User.create({
+      email: data.email,
+      password: data.password,
+    })
+    if (user) {
+      console.log('New user added')
+      const allUsers = await User.find()
+      console.log('All users are ', allUsers)
+    }
+  } catch (error) {
+    console.log('Captured error ', error)
+  }
 })
 
 app.on('window-all-closed', () => {
