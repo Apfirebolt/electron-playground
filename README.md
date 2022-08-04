@@ -76,13 +76,13 @@ Modules do not work with Electron for some reason so I have been using 'require'
 
 ## Project Screenshots
 
-Screenshots would be added as progress is made with this application. Some pages of the admin pages are displayed below
+Screenshots would be added as progress is made with this application. Screenshot of the main window. A captured it while developing it inside VSCode XD
 
-![alt text](./screenshots/admin.png)
+![alt text](./screenshots/main.png)
 
-Screenshot of the Profile page. User would land on this page after logging in.
+Screenshot of the smaller pop-up window which would be opened through a click event on the Menu item of the main window.
 
-![alt text](./screenshots/profile.png)
+![alt text](./screenshots/pop-up.png)
 
 ## Project Status
 
