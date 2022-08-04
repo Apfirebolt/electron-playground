@@ -128,9 +128,7 @@ ipcMain.on('form:insertData', async (e, data) => {
 // Send user items
 async function getUsers() {
   try {
-    console.log('Sending user items')
     const users = await User.find().sort({ created: 1 })
-    console.log('users are ', users)
     mainWindow.webContents.send('user:getUsers', JSON.stringify(users))
   } catch (err) {
     console.log(err)

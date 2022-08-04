@@ -66,13 +66,16 @@
 
       // On done
       ipcRenderer.on("user:getUsers", (e, users) => {
-        console.log("Listening to users fetch done..");
+        const container = document.querySelector(".container");
+        JSON.parse(users).forEach((item) => {
+          
+          const para = document.createElement("p");
+          const node = document.createTextNode(item.email);
+          para.appendChild(node);
 
-        const node = document.createElement("li");
-        const textnode = document.createTextNode("Water");
-        node.appendChild(textnode);
-        document.getElementsByClassName("container").appendChild(node);
-        console.log(JSON.parse(users));
+          container.appendChild(para);
+        })
+        console.log();
       });
     </script>
   </body>
