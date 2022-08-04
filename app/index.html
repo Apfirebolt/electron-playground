@@ -56,12 +56,26 @@
         const email = document.getElementById("userEmail").value;
         const password = document.getElementById("userPassword").value;
 
-        console.log(email, password)
+        console.log(email, password);
 
         ipcRenderer.send("form:insertData", {
           email,
           password,
         });
+      });
+
+      // On done
+      ipcRenderer.on("user:getUsers", (e, users) => {
+        const container = document.querySelector(".container");
+        JSON.parse(users).forEach((item) => {
+          
+          const para = document.createElement("p");
+          const node = document.createTextNode(item.email);
+          para.appendChild(node);
+
+          container.appendChild(para);
+        })
+        console.log();
       });
     </script>
   </body>
