@@ -8,7 +8,6 @@
       content="script-src 'self' 'unsafe-inline'"
     />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
     <title>Bootstrap Electron Boilerplate</title>
   </head>
   <body>
@@ -19,7 +18,7 @@
           <label for="exampleInputEmail1">Email address</label>
           <input
             type="email"
-            class="form-control"
+            class="form-control my-2"
             id="userEmail"
             aria-describedby="emailHelp"
             placeholder="Enter email"
@@ -32,7 +31,7 @@
           <label for="exampleInputPassword1">Password</label>
           <input
             type="password"
-            class="form-control"
+            class="form-control my-2"
             id="userPassword"
             placeholder="Password"
           />
@@ -49,6 +48,12 @@
 
       const form = document.getElementById("userForm");
 
+      ipcRenderer.send('users:load')
+
+      function navigateToAbout () {
+        ipcRenderer.send('navigateAbout');
+      }
+
       //   Onsubmit
       form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -56,11 +61,24 @@
         const email = document.getElementById("userEmail").value;
         const password = document.getElementById("userPassword").value;
 
-        console.log(email, password)
+        // console.log(email, password);
 
         ipcRenderer.send("form:insertData", {
           email,
           password,
+        });
+      });
+
+      // On done
+      ipcRenderer.on("user:getUsers", (e, users) => {
+        const container = document.querySelector(".container");
+        JSON.parse(users).forEach((item) => {
+          const para = document.createElement("p");
+          para.className = 'text-center bg-primary text-white p-3'
+          const node = document.createTextNode(item.email);
+          para.appendChild(node);
+
+          container.appendChild(para);
         });
       });
     </script>

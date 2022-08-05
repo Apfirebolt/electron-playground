@@ -60,6 +60,15 @@ app.on('ready', () => {
   mainWindow.on('ready', () => (mainWindow = null))
 })
 
+let window;
+
+function showAboutWindow() {
+  
+  mainWindow.loadFile("./app/about.html").then(() => {
+    mainWindow.show();
+  });
+}
+
 // Adding a sample Menu
 const menu = [
   ...(isMac
@@ -89,7 +98,7 @@ const menu = [
             },
             {
               label: 'Sub Menu',
-              click: createAboutWindow,
+              click: showAboutWindow,
             },
           ],
         },
@@ -109,6 +118,14 @@ const menu = [
       ]
     : []),
 ]
+// Navigate to about page
+
+ipcMain.on('navigateAbout', () => {
+  showAboutWindow()
+})
+// Load User Data
+ipcMain.on('users:load', getUsers)
+ipcMain.on('user:loadUsers', getUsers)
 
 ipcMain.on('form:insertData', async (e, data) => {
   // Get the data from the form and insert a new record
