@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://miro.medium.com/max/1200/1*O6KluMvEBZ1cBL3EPo4tig.png"  height="300" width="400" />
+</p>
+
 # Desktop App Development in Electron - Starter
 
 ![Electron.js](https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white)
@@ -86,4 +90,4 @@ Screenshot of the smaller pop-up window which would be opened through a click ev
 
 ## Project Status
 
-The most important features of the project is complete and ready to use. There is a possibility of adding minor features like adding comments for resolved complaints in the future. The project approximately took one week time for completion, I was working on other projects including my organisation projects as well meanwhile.
+This is a minor hobby project which I created after I completed this 6 Hr long Electron course on Udemy by Brad Traversy. Created in a matter of few hours and would be used as starting point for my other desktop based larger applications which I might create in future using Electron.

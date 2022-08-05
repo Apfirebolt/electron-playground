@@ -43,10 +43,7 @@ function createMainWindow() {
   })
 
   // Open dev tools for development when in developer mode
-  if (isDev) {
-    mainWindow.webContents.openDevTools()
-  }
-
+  mainWindow.webContents.openDevTools()
   mainWindow.loadFile('./app/index.html')
 }
 
@@ -127,6 +124,9 @@ ipcMain.on('navigateAbout', () => {
 ipcMain.on('users:load', getUsers)
 ipcMain.on('user:loadUsers', getUsers)
 
+// Load User Data
+ipcMain.on('user:loadUsers', getUsers)
+
 ipcMain.on('form:insertData', async (e, data) => {
   // Get the data from the form and insert a new record
   try {
@@ -135,14 +135,22 @@ ipcMain.on('form:insertData', async (e, data) => {
       password: data.password,
     })
     if (user) {
-      console.log('New user added')
-      const allUsers = await User.find()
-      console.log('All users are ', allUsers)
+      getUsers();
     }
   } catch (error) {
     console.log('Captured error ', error)
   }
 })
+
+// Send user items
+async function getUsers() {
+  try {
+    const users = await User.find().sort({ created: 1 })
+    mainWindow.webContents.send('user:getUsers', JSON.stringify(users))
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 app.on('window-all-closed', () => {
   if (!isMac) {
